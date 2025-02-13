@@ -1,13 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import './App.css';
 import Lotto from "./tools/lotto/Lotto";
+import { faDiamond, faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function App() {
-  const [activeIndex, setActiveIndex] = useState(null); // 선택된 li의 index
+  const [isActive, setActive] = useState(false);
 
-  const handleClick = (index) => {
-    setActiveIndex(index); // 클릭된 li의 index 업데이트
+  useEffect(() => {
+    const handleResize = () => {
+      // 화면 크기 체크 (예: 768px 이상이면 PC로 간주)
+      if (window.innerWidth >= 768) {
+        setActive(true);  // PC일 때
+      } else {
+        setActive(false);  // 모바일일 때
+      }
+    };
+
+    // 컴포넌트가 마운트될 때 초기 설정
+    handleResize();
+    // resize 이벤트 리스너 추가
+    window.addEventListener('resize', handleResize);
+    // 컴포넌트 언마운트 시 리스너 제거
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [])
+
+  const toggleMenus = () => {
+    setActive(!isActive);
   };
 
   return (
@@ -16,25 +38,24 @@ function App() {
         <Router>
           <nav class="navbar">
             <div class="navbar_logo">
-              <i class="fa fa-diamond" aria-hidden="true"></i>
-              <a href="#">경제적 자유</a>
+              <FontAwesomeIcon icon={faDiamond} aria-hidden={"true"} />
+              <Link to="/">경제적 자유</Link>
             </div>
+            {isActive ?
+              <ul class="navbar__menu">
+                {["로또 번호 추출기"].map((item, index) => (
+                  <li
+                    key={index}
+                    className={"navbar__menu"}
+                  >
+                    <Link to="/tools/lotto">로또 번호 추출기</Link>
+                  </li>
+                ))}
+              </ul> : null}
 
-            <ul class="navbar__menu">
-              {["로또 번호 추출기"].map((item, index) => (
-                <li
-                  key={index}
-                  className={activeIndex === index ? "active" : ""}
-                  onClick={() => handleClick(index)}
-                >
-                  <Link to="/tools/lotto">로또 번호 추출기</Link>
-                </li>
-              ))}
-            </ul>
-
-            <a href="#" class="navbar__toggleBtn" onClick={handleClick} onMouseOver={handleClick}>
-              <i class="fa fa-bars"></i>
-            </a>
+            <button class="navbar__toggleBtn" onClick={toggleMenus}>
+              <FontAwesomeIcon icon={faBars} />
+            </button>
           </nav>
           <Routes>
             <Route path="/tools/lotto" element={<Lotto />} />
