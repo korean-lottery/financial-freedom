@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import './App.css';
 import Lotto from "./tools/lotto/Lotto";
-import { faDiamond, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faLineChart, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function App() {
@@ -37,10 +37,10 @@ function App() {
       <header className="App-header">
         <Router>
           <nav class="navbar">
-            <div class="navbar_logo">
-              <FontAwesomeIcon icon={faDiamond} aria-hidden={"true"} />
-              <Link to="/">경제적 자유</Link>
-            </div>
+            <Link to="/" class="navbar__logo">
+              <FontAwesomeIcon icon={faLineChart} size='2x' />
+              <span style={{ fontSize: 25, marginLeft: 10 }}>경제적 자유</span>
+            </Link>
             {isActive ?
               <ul class="navbar__menu">
                 {["로또 번호 추출기"].map((item, index) => (

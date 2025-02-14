@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--background-color);
-  padding: 8px 12px;
+  padding: 12px 18px;
 }
 
 body {
@@ -18,9 +18,9 @@ body {
   background-color: var(--body-background-color);
 }
 
-.navbar__logo i {
-  color: var(--accent-color);
-  padding-left: 0;
+.navbar__logo {
+  display: flex;
+  align-items: center;
 }
 
 a {
