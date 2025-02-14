@@ -1,8 +1,8 @@
 :root {
+  --background-color: #ffffff;
+  --body-background-color: #f3f3f3;
   --button-hover-background-color: #000f22;
-  /* CSS 전역 변수 선언 */
   --button-hover-font-color: #ffffff;
-  /* CSS 전역 변수 선언 */
 }
 
 .navbar {
@@ -15,7 +15,7 @@
 
 body {
   margin: 0;
-  background-color: var(--bodybackground-color);
+  background-color: var(--body-background-color);
 }
 
 .navbar__logo i {
