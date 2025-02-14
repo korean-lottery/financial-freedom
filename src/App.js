@@ -4,6 +4,7 @@ import './App.css';
 import Lotto from "./tools/lotto/Lotto";
 import { faLineChart, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Blogs from './blogs/Blogs';
 
 function App() {
   const [isActive, setActive] = useState(false);
@@ -43,14 +44,12 @@ function App() {
             </Link>
             {isActive ?
               <ul class="navbar__menu">
-                {["로또 번호 추출기"].map((item, index) => (
-                  <li
-                    key={index}
-                    className={"navbar__menu"}
-                  >
-                    <Link to="/tools/lotto">로또 번호 추출기</Link>
-                  </li>
-                ))}
+                <li className={"navbar__menu"}>
+                  <Link to="/tools/lotto">로또 번호 추출기</Link>
+                </li>
+                <li className={"navbar__menu"}>
+                  <Link to="/blogs">블로그</Link>
+                </li>
               </ul> : null}
 
             <button class="navbar__toggleBtn" onClick={toggleMenus}>
@@ -59,6 +58,7 @@ function App() {
           </nav>
           <Routes>
             <Route path="/tools/lotto" element={<Lotto />} />
+            <Route path="/blogs" element={<Blogs />} />
           </Routes>
         </Router>
       </header>

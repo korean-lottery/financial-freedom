@@ -38,7 +38,7 @@ function Lotto() {
   }
 
   return (
-    <div className="lotto-body">
+    <div className="page-body">
       <div className="lotto-container">
         <h1>AI 로또 번호 추출기</h1>
         <button className="btn" onClick={generateLottoNumbers}>
